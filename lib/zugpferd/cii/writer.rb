@@ -173,6 +173,8 @@ module Zugpferd
             end
           end
 
+          build_billing_period(xml, doc.billing_period) if doc.billing_period
+
           doc.allowance_charges.each { |ac| build_allowance_charge(xml, ac) }
 
           if doc.payment_instructions&.note || doc.due_date || doc.payment_instructions&.mandate_reference

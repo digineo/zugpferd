@@ -36,7 +36,7 @@ module Zugpferd
                     :customization_id, :profile_id, :note, :seller, :buyer,
                     :line_items, :tax_breakdown, :monetary_totals,
                     :payment_instructions, :allowance_charges,
-                    :billing_reference
+                    :billing_period, :billing_reference
 
       # @param number [String] BT-1 Invoice number
       # @param issue_date [Date] BT-2 Issue date
