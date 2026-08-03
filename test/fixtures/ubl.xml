@@ -80,6 +80,10 @@
     <cbc:ID>1</cbc:ID>
     <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
     <cbc:LineExtensionAmount currencyID="EUR">100</cbc:LineExtensionAmount>
+    <cac:InvoicePeriod>
+      <cbc:StartDate>2024-01-01</cbc:StartDate>
+      <cbc:EndDate>2024-01-31</cbc:EndDate>
+    </cac:InvoicePeriod>
     <cac:Item>
       <cbc:Name>Test Item</cbc:Name>
       <cac:ClassifiedTaxCategory>
