@@ -295,6 +295,7 @@ module Zugpferd
                 xml["ram"].CategoryCode line.item.tax_category
                 xml["ram"].RateApplicablePercent format_decimal(line.item.tax_percent) if line.item.tax_percent
               end
+              build_billing_period(xml, line.billing_period) if line.billing_period
             end
 
             xml["ram"].SpecifiedTradeSettlementLineMonetarySummation do
@@ -303,6 +304,18 @@ module Zugpferd
           end
         end
       end
+
+      def build_billing_period(xml, period)
+        xml["ram"].BillingSpecifiedPeriod  do
+          xml["ram"].StartDateTime do
+            xml["udt"].DateTimeString(format_cii_date(period.start_date), format: "102")
+          end
+          xml["ram"].EndDateTime do
+            xml["udt"].DateTimeString(format_cii_date(period.end_date), format: "102")
+          end
+        end
+      end
+
 
       def build_item(xml, item)
         xml["ram"].SpecifiedTradeProduct do

@@ -40,7 +40,11 @@ module SampleInvoice
       id: "1",
       invoiced_quantity: "1",
       unit_code: "C62",
-      line_extension_amount: "100.00"
+      line_extension_amount: "100.00",
+      billing_period: Zugpferd::Model::Period.new(
+        start_date: Date.new(2024, 1, 1),
+        end_date:   Date.new(2024, 1, 31),
+      )
     )
     line.item = Zugpferd::Model::Item.new(
       name: "Test Item",
