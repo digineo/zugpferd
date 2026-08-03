@@ -51,6 +51,7 @@ module Zugpferd
         xml["cbc"].DocumentCurrencyCode doc.currency_code
         xml["cbc"].BuyerReference doc.buyer_reference if doc.buyer_reference
 
+        build_billing_period(xml, doc.billing_period) if doc.billing_period
         build_billing_reference(xml, doc.billing_reference) if doc.billing_reference
         build_supplier(xml, doc.seller, doc.payment_instructions) if doc.seller
         build_customer(xml, doc.buyer) if doc.buyer

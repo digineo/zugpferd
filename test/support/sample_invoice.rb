@@ -4,7 +4,11 @@ module SampleInvoice
       number: "TEST-001",
       issue_date: Date.new(2024, 1, 15),
       due_date: Date.new(2024, 1, 25),
-      currency_code: "EUR"
+      currency_code: "EUR",
+      billing_period: Zugpferd::Model::Period.new(
+        start_date: Date.new(2024, 1, 1),
+        end_date:   Date.new(2024, 1, 31),
+      )
     )
 
     invoice.buyer_reference = "BUYER-REF"
