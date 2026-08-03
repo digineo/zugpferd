@@ -30,11 +30,13 @@ module Zugpferd
       # @return [MonetaryTotals, nil] BG-22 Document totals
       # @return [PaymentInstructions, nil] BG-16 Payment information
       # @return [Array<AllowanceCharge>] BG-20/BG-21 Document-level allowances and charges
+      # @return [BillingReference, nil] BG-3 Preceding Invoice reference
       attr_accessor :number, :issue_date, :due_date, :type_code,
                     :currency_code, :delivery_date, :buyer_reference,
                     :customization_id, :profile_id, :note, :seller, :buyer,
                     :line_items, :tax_breakdown, :monetary_totals,
-                    :payment_instructions, :allowance_charges
+                    :payment_instructions, :allowance_charges,
+                    :billing_reference
 
       # @param number [String] BT-1 Invoice number
       # @param issue_date [Date] BT-2 Issue date

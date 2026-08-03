@@ -188,8 +188,19 @@ module Zugpferd
           end
 
           build_monetary_total(xml, doc.monetary_totals, doc.tax_breakdown) if doc.monetary_totals
+          build_billing_reference(xml, doc.billing_reference) if doc.billing_reference
         end
       end
+
+      def build_billing_reference(xml, reference)
+        xml["ram"].InvoiceReferencedDocument do
+          xml["ram"].IssuerAssignedID reference.number
+          xml["ram"].FormattedIssueDateTime do
+            xml["qdt"].DateTimeString(format_cii_date(reference.issue_date), format: "102")
+          end
+        end
+      end
+
 
       def build_payment_means(xml, payment)
         xml["ram"].SpecifiedTradeSettlementPaymentMeans do
