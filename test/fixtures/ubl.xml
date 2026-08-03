@@ -8,6 +8,12 @@
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
   <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
   <cbc:BuyerReference>BUYER-REF</cbc:BuyerReference>
+  <cac:BillingReference>
+    <cac:InvoiceDocumentReference>
+      <cbc:ID>R529812</cbc:ID>
+      <cbc:IssueDate>2024-05-30</cbc:IssueDate>
+    </cac:InvoiceDocumentReference>
+  </cac:BillingReference>
   <cac:AccountingSupplierParty>
     <cac:Party>
       <cbc:EndpointID schemeID="EM">seller@example.com</cbc:EndpointID>

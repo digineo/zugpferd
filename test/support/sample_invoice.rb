@@ -11,6 +11,11 @@ module SampleInvoice
     invoice.customization_id = "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0"
     invoice.profile_id = "urn:fdc:peppol.eu:2017:poacc:billing:01:1.0"
 
+    invoice.billing_reference = Zugpferd::Model::BillingReference.new(
+      number: "R529812",
+      issue_date: Date.new(2024, 5, 30),
+    )
+
     invoice.seller = Zugpferd::Model::TradeParty.new(name: "Test Seller GmbH")
     invoice.seller.vat_identifier = "DE123456789"
     invoice.seller.electronic_address = "seller@example.com"
@@ -20,7 +25,7 @@ module SampleInvoice
       city_name: "Berlin",
       postal_zone: "10115",
       street_name: "Teststr. 1"
-      )
+    )
     invoice.seller.contact = Zugpferd::Model::Contact.new(
       name: "Sample contact",
       telephone: "+49 12345678",

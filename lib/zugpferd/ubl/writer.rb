@@ -51,6 +51,7 @@ module Zugpferd
         xml["cbc"].DocumentCurrencyCode doc.currency_code
         xml["cbc"].BuyerReference doc.buyer_reference if doc.buyer_reference
 
+        build_billing_reference(xml, doc.billing_reference) if doc.billing_reference
         build_supplier(xml, doc.seller, doc.payment_instructions) if doc.seller
         build_customer(xml, doc.buyer) if doc.buyer
         build_delivery(xml, doc) if doc.delivery_date
@@ -60,6 +61,15 @@ module Zugpferd
         build_tax_total(xml, doc.tax_breakdown) if doc.tax_breakdown
         build_monetary_total(xml, doc.monetary_totals, doc.currency_code) if doc.monetary_totals
         doc.line_items.each { |li| build_line(xml, li, doc.currency_code) }
+      end
+
+      def build_billing_reference(xml, reference)
+        xml["cac"].BillingReference do
+          xml["cac"].InvoiceDocumentReference do
+            xml["cbc"].ID reference.number
+            xml["cbc"].IssueDate reference.issue_date
+          end
+        end
       end
 
       def build_supplier(xml, party, payment_instructions = nil)
