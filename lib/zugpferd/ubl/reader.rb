@@ -48,7 +48,11 @@ module Zugpferd
           type_code: text(root, type_code_element),
           currency_code: text(root, INVOICE[:currency_code]),
           buyer_reference: text(root, INVOICE[:buyer_reference]),
-          purchase_order_reference: text(root, ORDER_REFERENCE),
+          buyer_accounting_reference: text(root, INVOICE[:buyer_accounting_reference]),
+          purchase_order_reference: purchase_order_reference(root),
+          seller_order_reference: text(root, SALES_ORDER_REFERENCE),
+          contract_reference: text(root, CONTRACT_REFERENCE),
+          project_reference: text(root, @credit_note ? CREDIT_NOTE_PROJECT_REFERENCE : PROJECT_REFERENCE),
           customization_id: text(root, INVOICE[:customization_id]),
           profile_id: text(root, INVOICE[:profile_id]),
           note: text(root, INVOICE[:note]),
@@ -125,6 +129,7 @@ module Zugpferd
           payment_means_code: text(means_node, PAYMENT[:payment_means_code]),
           payment_id: text(means_node, PAYMENT[:payment_id]),
           account_id: text(means_node, PAYMENT[:account_id]),
+          account_name: text(means_node, PAYMENT[:account_name]),
           card_account_id: text(means_node, PAYMENT[:card_account_id]),
           card_network_id: text(means_node, PAYMENT[:card_network_id]),
           card_holder_name: text(means_node, PAYMENT[:card_holder_name]),
@@ -239,6 +244,11 @@ module Zugpferd
           tax_percent: parse_decimal(text(node, ALLOWANCE_CHARGE_FIELDS[:tax_percent])),
           currency_code: currency,
         )
+      end
+
+      def purchase_order_reference(root)
+        ref = text(root, ORDER_REFERENCE)
+        ref unless ref == ORDER_REFERENCE_NOT_APPLICABLE
       end
 
       def text(node, xpath)

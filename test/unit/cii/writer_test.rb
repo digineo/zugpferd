@@ -106,6 +106,41 @@ class CIIWriterTest < Minitest::Test
     assert_equal "PO-4711", read.purchase_order_reference
   end
 
+  def test_writes_project_reference_after_contract_reference
+    invoice = full_invoice
+    invoice.contract_reference = "C-98765"
+    invoice.project_reference = "PROJ-1"
+    agreement = write(invoice).at_xpath("//ram:ApplicableHeaderTradeAgreement", CII_NS)
+    project = agreement.at_xpath("ram:SpecifiedProcuringProject", CII_NS)
+
+    assert_equal %w[ContractReferencedDocument SpecifiedProcuringProject], child_names(agreement).last(2)
+    assert_equal %w[ID Name], child_names(project)
+    assert_equal "PROJ-1", text(project, "ram:ID")
+    assert_equal "Project reference", text(project, "ram:Name")
+  end
+
+  def test_omits_project_reference_when_not_set
+    assert_nil write(full_invoice).at_xpath("//ram:SpecifiedProcuringProject", CII_NS)
+  end
+
+  def test_project_reference_survives_roundtrip
+    invoice = full_invoice
+    invoice.project_reference = "PROJ-1"
+    read = Zugpferd::CII::Reader.new.read(Zugpferd::CII::Writer.new.write(invoice))
+
+    assert_equal "PROJ-1", read.project_reference
+  end
+
+  def test_contract_and_seller_order_reference_survive_roundtrip
+    invoice = full_invoice
+    invoice.contract_reference = "C-98765"
+    invoice.seller_order_reference = "SO-67890"
+    read = Zugpferd::CII::Reader.new.read(Zugpferd::CII::Writer.new.write(invoice))
+
+    assert_equal "C-98765", read.contract_reference
+    assert_equal "SO-67890", read.seller_order_reference
+  end
+
   def test_writes_party_elements_in_order
     seller = write(full_invoice).at_xpath(SELLER, CII_NS)
 
@@ -323,6 +358,29 @@ class CIIWriterTest < Minitest::Test
     assert_equal "102", date["format"]
   end
 
+  def test_writes_buyer_accounting_reference_after_preceding_invoice
+    invoice = full_invoice
+    invoice.preceding_invoices << PrecedingInvoice.new(number: "RE-0")
+    invoice.buyer_accounting_reference = "4217:65000"
+    settlement = write(invoice).at_xpath(SETTLEMENT, CII_NS)
+
+    assert_equal %w[InvoiceReferencedDocument ReceivableSpecifiedTradeAccountingAccount],
+                 child_names(settlement).last(2)
+    assert_equal "4217:65000", text(settlement, "ram:ReceivableSpecifiedTradeAccountingAccount/ram:ID")
+  end
+
+  def test_omits_buyer_accounting_reference_when_not_set
+    assert_nil write(full_invoice).at_xpath("//ram:ReceivableSpecifiedTradeAccountingAccount", CII_NS)
+  end
+
+  def test_buyer_accounting_reference_survives_roundtrip
+    invoice = full_invoice
+    invoice.buyer_accounting_reference = "4217:65000"
+    read = Zugpferd::CII::Reader.new.read(Zugpferd::CII::Writer.new.write(invoice))
+
+    assert_equal "4217:65000", read.buyer_accounting_reference
+  end
+
   def test_writes_only_first_preceding_invoice
     invoice = minimal_invoice
     invoice.preceding_invoices << PrecedingInvoice.new(number: "RE-0")
@@ -393,6 +451,15 @@ class CIIWriterTest < Minitest::Test
     assert_equal "Max Muster", text(means, "ram:ApplicableTradeSettlementFinancialCard/ram:CardholderName")
     assert_equal "DE02100100109307118603", text(means, "ram:PayerPartyDebtorFinancialAccount/ram:IBANID")
     assert_equal "DE89370400440532013000", text(means, "ram:PayeePartyCreditorFinancialAccount/ram:IBANID")
+  end
+
+  def test_payment_account_name_survives_roundtrip
+    invoice = full_invoice
+    invoice.payment_instructions.account_name = "Seller Clearing"
+    payment = Zugpferd::CII::Reader.new.read(Zugpferd::CII::Writer.new.write(invoice)).payment_instructions
+
+    assert_equal "DE89370400440532013000", payment.account_id
+    assert_equal "Seller Clearing", payment.account_name
   end
 
   def test_writes_tax_subtotal

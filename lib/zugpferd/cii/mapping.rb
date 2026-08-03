@@ -51,7 +51,14 @@ module Zugpferd
         currency_code:  "#{SETTLEMENT}/ram:InvoiceCurrencyCode",
         buyer_reference: "#{AGREEMENT}/ram:BuyerReference",
         purchase_order_reference: "#{AGREEMENT}/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID",
+        seller_order_reference: "#{AGREEMENT}/ram:SellerOrderReferencedDocument/ram:IssuerAssignedID",
+        contract_reference: "#{AGREEMENT}/ram:ContractReferencedDocument/ram:IssuerAssignedID",
+        project_reference: "#{AGREEMENT}/ram:SpecifiedProcuringProject/ram:ID",
+        buyer_accounting_reference: "#{SETTLEMENT}/ram:ReceivableSpecifiedTradeAccountingAccount/ram:ID",
       }.freeze
+
+      # Mandatory ram:Name of ram:SpecifiedProcuringProject, no business term in EN 16931
+      PROJECT_NAME = "Project reference"
 
       # Seller (BG-4)
       SELLER = "#{AGREEMENT}/ram:SellerTradeParty"
@@ -92,6 +99,7 @@ module Zugpferd
       PAYMENT = {
         payment_means_code: "ram:TypeCode",
         account_id:         "ram:PayeePartyCreditorFinancialAccount/ram:IBANID",
+        account_name:       "ram:PayeePartyCreditorFinancialAccount/ram:AccountName",
         card_account_id:    "ram:ApplicableTradeSettlementFinancialCard/ram:ID",
         card_holder_name:   "ram:ApplicableTradeSettlementFinancialCard/ram:CardholderName",
         debited_account_id: "ram:PayerPartyDebtorFinancialAccount/ram:IBANID",

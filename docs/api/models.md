@@ -42,7 +42,11 @@ invoice = Zugpferd::Model::Invoice.new(
 | `invoicing_period_start_date` | BT-73 | `Date` | Invoicing period start date |
 | `invoicing_period_end_date` | BT-74 | `Date` | Invoicing period end date |
 | `buyer_reference` | BT-10 | `String` | Buyer reference |
+| `project_reference` | BT-11 | `String` | Project reference |
+| `contract_reference` | BT-12 | `String` | Contract reference |
 | `purchase_order_reference` | BT-13 | `String` | Purchase order reference |
+| `seller_order_reference` | BT-14 | `String` | Sales order reference |
+| `buyer_accounting_reference` | BT-19 | `String` | Buyer accounting reference |
 | `customization_id` | BT-24 | `String` | Specification identifier |
 | `profile_id` | BT-23 | `String` | Business process type |
 | `note` | BT-22 | `String` | Invoice note |
@@ -242,6 +246,7 @@ payment.account_id = "DE89370400440532013000"
 | `payment_means_code` | BT-81 | `String` | Payment means code (required) |
 | `payment_id` | BT-83 | `String` | Payment reference |
 | `account_id` | BT-84 | `String` | IBAN |
+| `account_name` | BT-85 | `String` | Payment account name |
 | `note` | BT-20 | `String` | Payment terms |
 | `card_account_id` | BT-87 | `String` | Payment card number |
 | `card_holder_name` | BT-88 | `String` | Card holder name |
