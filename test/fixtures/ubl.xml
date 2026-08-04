@@ -25,6 +25,17 @@
   <cac:ContractDocumentReference>
     <cbc:ID>C-98765</cbc:ID>
   </cac:ContractDocumentReference>
+  <cac:AdditionalDocumentReference>
+    <cbc:ID>ATT-002</cbc:ID>
+    <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
+  </cac:AdditionalDocumentReference>
+  <cac:AdditionalDocumentReference>
+    <cbc:ID>ATT-001</cbc:ID>
+    <cbc:DocumentDescription>Supporting Document</cbc:DocumentDescription>
+    <cac:Attachment>
+      <cbc:EmbeddedDocumentBinaryObject mimeCode="text/csv" filename="table.csv">b25lLHR3bwp0aHJlZSxmb3VyCmZpdmUsc2l4Cg==</cbc:EmbeddedDocumentBinaryObject>
+    </cac:Attachment>
+  </cac:AdditionalDocumentReference>
   <cac:AccountingSupplierParty>
     <cac:Party>
       <cbc:EndpointID schemeID="EM">seller@example.com</cbc:EndpointID>

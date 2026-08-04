@@ -95,6 +95,8 @@ module Zugpferd
               xml["ram"].IssuerAssignedID doc.contract_reference
             end
           end
+
+          doc.additional_referenced_documents.each { |att| build_additional_document_reference(xml, att) }
         end
       end
 
@@ -353,12 +355,30 @@ module Zugpferd
         end
       end
 
-
       def build_item(xml, item)
         xml["ram"].SpecifiedTradeProduct do
           xml["ram"].SellerAssignedID item.sellers_identifier if item.sellers_identifier
           xml["ram"].Name item.name
           xml["ram"].Description item.description if item.description
+        end
+      end
+
+      def build_additional_document_reference(xml, reference)
+        xml["ram"].AdditionalReferencedDocument do
+          xml["ram"].IssuerAssignedID reference.id
+
+          if (type_code = reference.attached_document ? 916 : reference.type_code)
+            xml["ram"].TypeCode type_code if type_code
+          end
+
+          if  (adoc = reference.attached_document)
+            xml["ram"].AttachmentBinaryObject \
+              Base64.strict_encode64(adoc.blob),
+              mimeCode: adoc.mime_code,
+              filename: adoc.filename
+          elsif reference.description
+            xml["ram"].Name reference.description
+          end
         end
       end
 

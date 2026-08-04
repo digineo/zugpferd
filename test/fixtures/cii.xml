@@ -96,6 +96,15 @@
       <ram:ContractReferencedDocument>
         <ram:IssuerAssignedID>C-98765</ram:IssuerAssignedID>
       </ram:ContractReferencedDocument>
+      <ram:AdditionalReferencedDocument>
+        <ram:IssuerAssignedID>ATT-002</ram:IssuerAssignedID>
+        <ram:TypeCode>130</ram:TypeCode>
+      </ram:AdditionalReferencedDocument>
+      <ram:AdditionalReferencedDocument>
+        <ram:IssuerAssignedID>ATT-001</ram:IssuerAssignedID>
+        <ram:TypeCode>916</ram:TypeCode>
+        <ram:AttachmentBinaryObject mimeCode="text/csv" filename="table.csv">b25lLHR3bwp0aHJlZSxmb3VyCmZpdmUsc2l4Cg==</ram:AttachmentBinaryObject>
+      </ram:AdditionalReferencedDocument>
     </ram:ApplicableHeaderTradeAgreement>
     <ram:ApplicableHeaderTradeDelivery/>
     <ram:ApplicableHeaderTradeSettlement>

@@ -23,6 +23,22 @@ module SampleInvoice
       issue_date: Date.new(2024, 5, 30),
     )
 
+    invoice.additional_referenced_documents << Zugpferd::Model::AdditionalReferencedDocument.new(
+      id: "ATT-002",
+      type_code: 130,
+    )
+
+    invoice.additional_referenced_documents << Zugpferd::Model::AdditionalReferencedDocument.new(
+      id: "ATT-001",
+      description: "Supporting Document",
+      attached_document: Zugpferd::Model::AttachedDocument.new(
+        mime_code: "text/csv",
+        filename: "table.csv",
+        blob: "one,two\nthree,four\nfive,six\n",
+      )
+    )
+
+
     invoice.seller = Zugpferd::Model::TradeParty.new(name: "Test Seller GmbH")
     invoice.seller.vat_identifier = "DE123456789"
     invoice.seller.electronic_address = "seller@example.com"
