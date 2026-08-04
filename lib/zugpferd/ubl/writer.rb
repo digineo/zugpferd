@@ -136,6 +136,13 @@ module Zugpferd
                 xml["cbc"].ID "VAT"
               end
             end
+          elsif party.tax_identifier
+            xml["cac"].PartyTaxScheme do
+              xml["cbc"].CompanyID party.tax_identifier
+              xml["cac"].TaxScheme do
+                xml["cbc"].ID "FC"
+              end
+            end
           end
 
           xml["cac"].PartyLegalEntity do
