@@ -74,8 +74,27 @@ module Zugpferd
       def build_agreement(xml, doc)
         xml["ram"].ApplicableHeaderTradeAgreement do
           xml["ram"].BuyerReference doc.buyer_reference if doc.buyer_reference
+
           build_party(xml, "SellerTradeParty", doc.seller) if doc.seller
           build_party(xml, "BuyerTradeParty", doc.buyer) if doc.buyer
+
+          if doc.seller_order_reference
+            xml["ram"].SellerOrderReferencedDocument do
+              xml["ram"].IssuerAssignedID doc.seller_order_reference
+            end
+          end
+
+          if doc.buyer_order_reference
+            xml["ram"].BuyerOrderReferencedDocument do
+              xml["ram"].IssuerAssignedID doc.buyer_order_reference
+            end
+          end
+
+          if doc.contract_reference
+            xml["ram"].ContractReferencedDocument do
+              xml["ram"].IssuerAssignedID doc.contract_reference
+            end
+          end
         end
       end
 

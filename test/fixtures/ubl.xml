@@ -7,17 +7,24 @@
   <cbc:DueDate>2024-01-25</cbc:DueDate>
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
   <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
-  <cbc:BuyerReference>BUYER-REF</cbc:BuyerReference>
+  <cbc:BuyerReference>LEITWEG-123-456</cbc:BuyerReference>
   <cac:InvoicePeriod>
     <cbc:StartDate>2024-01-01</cbc:StartDate>
     <cbc:EndDate>2024-01-31</cbc:EndDate>
   </cac:InvoicePeriod>
+  <cac:OrderReference>
+    <cbc:ID>PO-12345</cbc:ID>
+    <cbc:SalesOrderID>SO-67890</cbc:SalesOrderID>
+  </cac:OrderReference>
   <cac:BillingReference>
     <cac:InvoiceDocumentReference>
       <cbc:ID>R529812</cbc:ID>
       <cbc:IssueDate>2024-05-30</cbc:IssueDate>
     </cac:InvoiceDocumentReference>
   </cac:BillingReference>
+  <cac:ContractDocumentReference>
+    <cbc:ID>C-98765</cbc:ID>
+  </cac:ContractDocumentReference>
   <cac:AccountingSupplierParty>
     <cac:Party>
       <cbc:EndpointID schemeID="EM">seller@example.com</cbc:EndpointID>

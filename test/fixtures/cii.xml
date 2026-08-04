@@ -51,7 +51,7 @@
       </ram:SpecifiedLineTradeSettlement>
     </ram:IncludedSupplyChainTradeLineItem>
     <ram:ApplicableHeaderTradeAgreement>
-      <ram:BuyerReference>BUYER-REF</ram:BuyerReference>
+      <ram:BuyerReference>LEITWEG-123-456</ram:BuyerReference>
       <ram:SellerTradeParty>
         <ram:Name>Test Seller GmbH</ram:Name>
         <ram:DefinedTradeContact>
@@ -87,6 +87,15 @@
           <ram:URIID schemeID="EM">buyer@example.com</ram:URIID>
         </ram:URIUniversalCommunication>
       </ram:BuyerTradeParty>
+      <ram:SellerOrderReferencedDocument>
+        <ram:IssuerAssignedID>SO-67890</ram:IssuerAssignedID>
+      </ram:SellerOrderReferencedDocument>
+      <ram:BuyerOrderReferencedDocument>
+        <ram:IssuerAssignedID>PO-12345</ram:IssuerAssignedID>
+      </ram:BuyerOrderReferencedDocument>
+      <ram:ContractReferencedDocument>
+        <ram:IssuerAssignedID>C-98765</ram:IssuerAssignedID>
+      </ram:ContractReferencedDocument>
     </ram:ApplicableHeaderTradeAgreement>
     <ram:ApplicableHeaderTradeDelivery/>
     <ram:ApplicableHeaderTradeSettlement>

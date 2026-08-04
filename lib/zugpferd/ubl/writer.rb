@@ -52,7 +52,22 @@ module Zugpferd
         xml["cbc"].BuyerReference doc.buyer_reference if doc.buyer_reference
 
         build_billing_period(xml, doc.billing_period) if doc.billing_period
+
+        if doc.buyer_order_reference || doc.seller_order_reference
+          xml["cac"].OrderReference do
+            xml["cbc"].ID doc.buyer_order_reference || "NA"
+            xml["cbc"].SalesOrderID doc.seller_order_reference if doc.seller_order_reference
+          end
+        end
+
         build_billing_reference(xml, doc.billing_reference) if doc.billing_reference
+
+        if doc.contract_reference
+          xml["cac"].ContractDocumentReference do
+            xml["cbc"].ID doc.contract_reference
+          end
+        end
+
         build_supplier(xml, doc.seller, doc.payment_instructions) if doc.seller
         build_customer(xml, doc.buyer) if doc.buyer
         build_delivery(xml, doc) if doc.delivery_date
