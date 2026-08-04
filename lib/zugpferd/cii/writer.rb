@@ -131,6 +131,10 @@ module Zugpferd
             xml["ram"].SpecifiedTaxRegistration do
               xml["ram"].ID(party.vat_identifier, schemeID: "VA")
             end
+          elsif party.tax_identifier
+            xml["ram"].SpecifiedTaxRegistration do
+              xml["ram"].ID(party.tax_identifier, schemeID: "FC")
+            end
           end
         end
       end
