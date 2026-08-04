@@ -68,6 +68,7 @@ module Zugpferd
           end
         end
 
+        doc.additional_referenced_documents.each { |att| build_additional_document_reference(xml, att) }
         build_supplier(xml, doc.seller, doc.payment_instructions) if doc.seller
         build_customer(xml, doc.buyer) if doc.buyer
         build_delivery(xml, doc) if doc.delivery_date
@@ -345,6 +346,30 @@ module Zugpferd
         # Remove trailing zeros but keep at least one decimal
         str = value.to_s("F")
         str.sub(/\.?0+$/, "")
+      end
+
+      def build_additional_document_reference(xml, reference)
+        xml["cac"].AdditionalDocumentReference do
+          xml["cbc"].ID reference.id
+          xml["cbc"].DocumentTypeCode reference.type_code if reference.type_code
+          xml["cbc"].DocumentDescription reference.description if reference.description
+
+          if reference.attached_document || reference.external_location
+            xml["cac"].Attachment do
+              if reference.attached_document
+                adoc = reference.attached_document
+                xml["cbc"].EmbeddedDocumentBinaryObject \
+                  Base64.strict_encode64(adoc.blob),
+                  mimeCode: adoc.mime_code,
+                  filename: adoc.filename
+              elsif reference.external_location
+                xml["cac"].ExternalReference do
+                  xml["cbc"].URI reference.external_location
+                end
+              end
+            end
+          end
+        end
       end
     end
   end

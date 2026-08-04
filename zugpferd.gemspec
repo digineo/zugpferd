@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*.rb"] + Dir["vendor/zugferd/**/*"] + ["bin/setup-schemas"]
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "base64"
   spec.add_dependency "nokogiri", "~> 1.16"
   spec.add_dependency "bigdecimal", "~> 3.1"
 
