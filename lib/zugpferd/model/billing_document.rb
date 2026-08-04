@@ -44,7 +44,8 @@ module Zugpferd
                     :customization_id, :profile_id, :note, :seller, :buyer,
                     :line_items, :tax_breakdown, :monetary_totals,
                     :payment_instructions, :allowance_charges, :preceding_invoices,
-                    :contract_reference, :seller_order_reference
+                    :contract_reference, :seller_order_reference,
+                    :additional_referenced_documents
 
       # @param number [String] BT-1 Invoice number
       # @param issue_date [Date] BT-2 Issue date
@@ -60,6 +61,7 @@ module Zugpferd
         @line_items = []
         @allowance_charges = []
         @preceding_invoices = []
+        @additional_referenced_documents = []
         @tax_breakdown = nil
         rest.each { |k, v| public_send(:"#{k}=", v) }
       end
