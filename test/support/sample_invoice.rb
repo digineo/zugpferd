@@ -26,6 +26,21 @@ module SampleInvoice
     invoice.customization_id = "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0"
     invoice.profile_id = "urn:fdc:peppol.eu:2017:poacc:billing:01:1.0"
 
+    invoice.additional_referenced_documents << Zugpferd::Model::AdditionalReferencedDocument.new(
+      id: "ATT-002",
+      type_code: 130,
+    )
+
+    invoice.additional_referenced_documents << Zugpferd::Model::AdditionalReferencedDocument.new(
+      id: "ATT-001",
+      description: "Supporting Document",
+      attached_document: Zugpferd::Model::AttachedDocument.new(
+        mime_code: "text/csv",
+        filename: "table.csv",
+        blob: "one,two\nthree,four\nfive,six\n",
+      )
+    )
+
     set_sample_attributes(invoice)
   end
 

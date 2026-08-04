@@ -1,8 +1,12 @@
+require "base64"
+
 module Zugpferd
   class Error < StandardError; end
 end
 
 require_relative "zugpferd/model/billing_document"
+require_relative "zugpferd/model/additional_referenced_document"
+require_relative "zugpferd/model/attached_document"
 require_relative "zugpferd/model/invoice"
 require_relative "zugpferd/model/credit_note"
 require_relative "zugpferd/model/corrected_invoice"
