@@ -20,6 +20,9 @@ module SampleInvoice
       due_date: Date.new(2024, 1, 25),
     )
 
+    invoice.purchase_order_reference = "PO-12345"
+    invoice.seller_order_reference = "SO-67890"
+    invoice.contract_reference = "C-98765"
     invoice.customization_id = "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0"
     invoice.profile_id = "urn:fdc:peppol.eu:2017:poacc:billing:01:1.0"
 

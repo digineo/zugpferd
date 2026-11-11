@@ -8,6 +8,13 @@
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
   <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
   <cbc:BuyerReference>BUYER-REF</cbc:BuyerReference>
+  <cac:OrderReference>
+    <cbc:ID>PO-12345</cbc:ID>
+    <cbc:SalesOrderID>SO-67890</cbc:SalesOrderID>
+  </cac:OrderReference>
+  <cac:ContractDocumentReference>
+    <cbc:ID>C-98765</cbc:ID>
+  </cac:ContractDocumentReference>
   <cac:AccountingSupplierParty>
     <cac:Party>
       <cbc:EndpointID schemeID="EM">seller@example.com</cbc:EndpointID>

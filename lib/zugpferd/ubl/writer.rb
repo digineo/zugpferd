@@ -51,8 +51,14 @@ module Zugpferd
         xml["cbc"].DocumentCurrencyCode doc.currency_code
         xml["cbc"].BuyerReference doc.buyer_reference if doc.buyer_reference
         build_invoice_period(xml, doc) if doc.invoicing_period_start_date || doc.invoicing_period_end_date
-        build_order_reference(xml, doc) if doc.purchase_order_reference
+        build_order_reference(xml, doc) if doc.purchase_order_reference || doc.seller_order_reference
         doc.preceding_invoices.each { |pi| build_preceding_invoice(xml, pi) }
+
+        if doc.contract_reference
+          xml["cac"].ContractDocumentReference do
+            xml["cbc"].ID doc.contract_reference
+          end
+        end
 
         build_supplier(xml, doc.seller, doc.payment_instructions) if doc.seller
         build_customer(xml, doc.buyer) if doc.buyer
@@ -167,7 +173,8 @@ module Zugpferd
 
       def build_order_reference(xml, doc)
         xml["cac"].OrderReference do
-          xml["cbc"].ID doc.purchase_order_reference
+          xml["cbc"].ID doc.purchase_order_reference || "NA"
+          xml["cbc"].SalesOrderID doc.seller_order_reference if doc.seller_order_reference
         end
       end
 
